@@ -7,7 +7,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { blogApi } from "@/lib/api/client";
 import { formatDate } from "@/lib/utils";
-import { Heart, MessageCircle, Eye, Edit, Trash2, MoreVertical } from "lucide-react";
+import {
+  Heart,
+  MessageCircle,
+  Eye,
+  Edit,
+  Trash2,
+  MoreVertical,
+} from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useToast } from "@/components/ui/use-toast";
 import {
@@ -52,17 +59,20 @@ export function BlogList() {
       try {
         const sections = JSON.parse(blog.content);
         const textContent = sections
-          .filter((s: any) => s.type === 'text' || s.type === 'header' || s.type === 'subheader')
+          .filter(
+            (s: any) =>
+              s.type === "text" || s.type === "header" || s.type === "subheader"
+          )
           .map((s: any) => s.content)
-          .join(' ')
-          .replace(/<[^>]*>/g, '')
+          .join(" ")
+          .replace(/<[^>]*>/g, "")
           .substring(0, 200);
-        return textContent + (textContent.length === 200 ? '...' : '');
+        return textContent + (textContent.length === 200 ? "..." : "");
       } catch {
-        return '';
+        return "";
       }
     }
-    return '';
+    return "";
   };
 
   useEffect(() => {
@@ -94,14 +104,14 @@ export function BlogList() {
   };
 
   const handleDelete = async (blogId: string) => {
-    if (!confirm('Are you sure you want to delete this blog?')) return;
-    
+    if (!confirm("Are you sure you want to delete this blog?")) return;
+
     try {
       await blogApi.deleteBlog(blogId);
-      setBlogs(blogs.filter(blog => blog.id !== blogId));
-      toast({ title: 'Blog deleted successfully' });
+      setBlogs(blogs.filter((blog) => blog.id !== blogId));
+      toast({ title: "Blog deleted successfully" });
     } catch (error) {
-      toast({ title: 'Error deleting blog', variant: 'destructive' });
+      toast({ title: "Error deleting blog", variant: "destructive" });
     }
   };
 
@@ -121,7 +131,7 @@ export function BlogList() {
             {blog.coverImage && (
               <div className="w-48 h-full relative flex-shrink-0">
                 <img
-                  src={`http://localhost:4000${blog.coverImage}`}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}${blog.coverImage}`}
                   alt={blog.title}
                   className="size-48 object-center object-cover"
                 />
@@ -131,7 +141,10 @@ export function BlogList() {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <CardTitle className="line-clamp-2 flex-1">
-                    <Link href={`/blog/${blog.slug}`} className="hover:underline">
+                    <Link
+                      href={`/blog/${blog.slug}`}
+                      className="hover:underline"
+                    >
                       {blog.title}
                     </Link>
                   </CardTitle>
@@ -147,7 +160,7 @@ export function BlogList() {
                           <Edit className="w-4 h-4 mr-2" />
                           Edit
                         </DropdownMenuItem>
-                        <DropdownMenuItem 
+                        <DropdownMenuItem
                           onClick={() => handleDelete(blog.id)}
                           className="text-red-600"
                         >
