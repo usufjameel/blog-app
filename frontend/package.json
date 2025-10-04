@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test:e2e": "cypress run"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
@@ -43,6 +46,7 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
+    "cypress": "^14.5.4",
     "eslint": "^8",
     "eslint-config-next": "15.0.0"
   }

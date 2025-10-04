@@ -196,6 +196,33 @@ Authorization: Bearer <firebase_id_token>
 
 ## 🧪 Testing
 
+### Frontend Testing (Cypress E2E)
+Comprehensive end-to-end testing with Cypress:
+
+```bash
+cd frontend
+npm run cypress:open  # Interactive mode
+npm run cypress:run   # Headless mode
+```
+
+**Test Credentials:**
+- Email: `xyz@gmail.com`
+- Password: `xyz123`
+
+**Test Coverage:**
+- Authentication flow (signup/login)
+- Blog creation and editing
+- User interactions (like, comment)
+- Navigation and routing
+- Session management
+
+**Test Features:**
+- Session-based authentication
+- Cross-browser compatibility
+- Real user interaction simulation
+- Automated signup and login
+- Firebase authentication integration
+
 ### Backend Testing
 Comprehensive Jest test suite with 100% controller coverage:
 
